@@ -3,8 +3,8 @@ package application.gym.serviceImpl;
 import application.gym.dao.UserDao;
 import application.gym.POJO.User;
 import application.gym.service.UserService;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -20,8 +20,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // Hachage du mot de passe
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.save(user);
+    }
+
+    @Override
+    public User authenticate(String email, String password) {
+        return null;
     }
 
     @Override

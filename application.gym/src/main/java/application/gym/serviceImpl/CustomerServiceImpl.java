@@ -6,6 +6,7 @@ import application.gym.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -14,18 +15,21 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerDao customerDao;
 
     @Override
-    public Customer addCustomer(Customer customer) {
+    public Customer createCustomer(Customer customer) {
+        if (customer == null || customer.getEmail() == null || customer.getPhone() == null) {
+            throw new IllegalArgumentException("Les informations du client sont invalides.");
+        }
         return customerDao.save(customer);
-    }
-
-    @Override
-    public Customer getCustomerByEmail(String email) {
-        return customerDao.findByEmail(email);
     }
 
     @Override
     public List<Customer> getAllCustomers() {
         return customerDao.findAll();
     }
-}
 
+    @Override
+    public Customer getCustomerById(Long id) {
+        Optional<Customer> customer = customerDao.findById(id);
+        return customer.orElse(null);
+    }
+}

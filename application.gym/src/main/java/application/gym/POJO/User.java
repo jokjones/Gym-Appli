@@ -5,19 +5,19 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
 
-
-@NamedQuery(name = "User.findByEmailId", query="select u from User u where u.email =:email")
+@NamedQuery(name = "User.findByEmailId", query = "select u from User u where u.email =:email")
 @Data
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@Table(name="user")
+@Table(name = "user")
 public class User implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,9 @@ public class User implements Serializable {
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -35,6 +38,4 @@ public class User implements Serializable {
 
     @Column(name = "active", nullable = false)
     private boolean active = true;
-
-
 }

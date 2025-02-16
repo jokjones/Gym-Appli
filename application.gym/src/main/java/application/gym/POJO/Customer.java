@@ -2,6 +2,8 @@ package application.gym.POJO;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -9,9 +11,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "customer")
 public class Customer implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface SubscriptionService {
     Subscription subscribe(Long customerId, Long packId);
-    List<Subscription> getAllSubscriptions();
+    List<Subscription> getSubscriptionsByCustomer(Long customerId);
 }

@@ -4,8 +4,9 @@ import application.gym.POJO.Customer;
 import java.util.List;
 
 public interface CustomerService {
-    Customer addCustomer(Customer customer);
-    Customer getCustomerByEmail(String email);
+    Customer createCustomer(Customer customer);
     List<Customer> getAllCustomers();
+    Customer getCustomerById(Long id);
 }
+
 

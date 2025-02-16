@@ -1,16 +1,23 @@
 package application.gym.rest;
 
-
+import application.gym.POJO.User;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
-@RequestMapping(path = "/user")
+@RestController
+@RequestMapping("/user")
 public interface UserRest {
 
-@PostMapping(path = "/signup")
-    public ResponseEntity<String>  signUp(@RequestBody(required = true) Map<String, String> requestMap);
+
+    @PostMapping("/register")
+    ResponseEntity<?> registerUser(@RequestBody User user);
+
+
+    ResponseEntity<?> registerUser(String email, String password);
+
+    @PostMapping("/login")
+    ResponseEntity<?> login(@RequestParam String email, @RequestParam String password);
+
+    @PutMapping("/change-password/{userId}")
+    ResponseEntity<?> changePassword(@PathVariable Long userId, @RequestParam String oldPassword, @RequestParam String newPassword);
 }
